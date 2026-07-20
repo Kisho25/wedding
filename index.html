@@ -40,7 +40,7 @@
             Sergio & Marine
           </h1>
           <p class="guest-callout">
-            For <span id="inviteeName">Guest</span>
+            For <span id="inviteeName"><script>document.write(decodeURIComponent((new URLSearchParams(location.search).get('guest')||'Guest')))</script></span>
           </p>
           <p class="tagline invitee-line">
             You are invited to celebrate with us.

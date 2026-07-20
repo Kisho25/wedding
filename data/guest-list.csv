@@ -4,4 +4,6 @@ guestId,inviteeName,attendance,lastUpdated,pageUrl
 "rima-haddad","Rima Haddad","will not attend","2026-07-20T14:25:13.592Z","http://192.168.0.106:8000/?guest=Rima%20Haddad&id=rima-haddad#confirm"
 "christian-kichian","Christian Kichian","pending","2026-07-20T14:32:57.407Z","http://192.168.0.106:8000/?guest=Christian%20Kichian&id=christian-kichian"
 "karl-chidiac"," Karl Chidiac","pending","2026-07-20T14:33:11.407Z",""
-"elise-mahfouz"
+"elise-mahfouz", "Elise Mahfouz"
+"valerie-maria-el-achkar","Valerie Maria El Achkar"
+"tia-maria-haddad","Tia Maria Haddad"
