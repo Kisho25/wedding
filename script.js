@@ -180,7 +180,6 @@ window.addEventListener("load", () => {
   }
   updateActivePage("welcome");
   startMusic();
-  registerInvite().catch(() => {});
 
   const storedResponse = getStoredResponse();
   if (storedResponse) {

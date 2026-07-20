@@ -34,29 +34,35 @@ function ensureHeaderRow(sheet) {
 function upsertRow(sheet, key, rowValues) {
   const lastRow = sheet.getLastRow();
 
-  // Determine which column holds the guest key by inspecting the header.
-  const headerRange = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0] || [];
-  const guestIdColIndex = headerRange.findIndex((h) => String(h).toLowerCase().includes('guest id')) + 1 || 1;
+  const normalizedKey = String(key || '').trim().toLowerCase();
 
   if (lastRow < 2) {
-    // Ensure we write a full row matching header length
     const fullRow = buildFullRow(sheet, rowValues);
     sheet.appendRow(fullRow);
     return;
   }
 
-  // Read existing keys from the detected guestId column
-  const keys = sheet.getRange(2, guestIdColIndex, lastRow - 1, 1).getValues().flat();
-  const existingIndex = keys.findIndex((value) => String(value) === String(key));
-
-  if (existingIndex === -1) {
-    const fullRow = buildFullRow(sheet, rowValues);
-    sheet.appendRow(fullRow);
-    return;
+  // Read the body of the sheet and search for the key in any column (case-insensitive)
+  const body = sheet.getRange(2, 1, lastRow - 1, sheet.getLastColumn()).getValues();
+  let foundRowIndex = -1;
+  for (let i = 0; i < body.length; i++) {
+    const row = body[i];
+    for (let j = 0; j < row.length; j++) {
+      const cell = String(row[j] || '').trim().toLowerCase();
+      if (cell && cell === normalizedKey) {
+        foundRowIndex = i; // zero-based within body
+        break;
+      }
+    }
+    if (foundRowIndex !== -1) break;
   }
 
   const fullRow = buildFullRow(sheet, rowValues);
-  sheet.getRange(existingIndex + 2, 1, 1, fullRow.length).setValues([fullRow]);
+  if (foundRowIndex === -1) {
+    sheet.appendRow(fullRow);
+  } else {
+    sheet.getRange(foundRowIndex + 2, 1, 1, fullRow.length).setValues([fullRow]);
+  }
 }
 
 function buildFullRow(sheet, rowValues) {
