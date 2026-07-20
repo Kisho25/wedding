@@ -1,11 +1,11 @@
 const music = document.getElementById("backgroundMusic");
+const prerollMusic = document.getElementById("backgroundMusicPreroll");
 const pages = Array.from(document.querySelectorAll(".page"));
 const dots = Array.from(document.querySelectorAll(".dot"));
 const inviteeNameEl = document.getElementById("inviteeName");
 const confirmButtons = Array.from(document.querySelectorAll("[data-attendance]"));
 const responsePopup = document.getElementById("responsePopup");
 const responseOverlay = document.getElementById("responseOverlay");
-const musicPrompt = document.getElementById("musicPrompt");
 
 const params = new URLSearchParams(window.location.search);
 const inviteeName = params.get("guest") || params.get("name") || "Guest";
@@ -40,12 +40,25 @@ function updateActivePage(id) {
   });
 }
 
-function unmuteMusicOnInteraction() {
-  if (!music || !musicStarted) {
+function playMainMusic() {
+  if (!music || musicStarted) {
     return;
   }
 
-  if (music.muted) {
+  musicStarted = true;
+  music.currentTime = 0;
+  music.volume = 1;
+  const playPromise = music.play();
+
+  if (playPromise && typeof playPromise.then === "function") {
+    playPromise
+      .then(() => {
+        music.muted = false;
+      })
+      .catch(() => {
+        musicStarted = false;
+      });
+  } else {
     music.muted = false;
   }
 }
@@ -55,12 +68,28 @@ function startMusic() {
     return;
   }
 
-  musicStarted = true;
-  if (music.muted) {
-    music.play().catch(() => {
-      musicStarted = false;
-    });
+  if (prerollMusic) {
+    prerollMusic.currentTime = 0;
+    prerollMusic.volume = 1;
+    const prerollPromise = prerollMusic.play();
+
+    if (prerollPromise && typeof prerollPromise.then === "function") {
+      prerollPromise
+        .then(() => {
+          prerollMusic.muted = false;
+          prerollMusic.addEventListener("ended", playMainMusic, { once: true });
+          if (prerollMusic.currentTime >= prerollMusic.duration - 0.05) {
+            playMainMusic();
+          }
+        })
+        .catch(() => {
+          playMainMusic();
+        });
+      return;
+    }
   }
+
+  playMainMusic();
 }
 
 function setButtonsDisabled(disabled) {
@@ -175,13 +204,7 @@ const observer = new IntersectionObserver(
 
 pages.forEach((page) => observer.observe(page));
 
-document.addEventListener("pointerdown", unmuteMusicOnInteraction, { passive: true });
-document.addEventListener("touchstart", unmuteMusicOnInteraction, { passive: true });
-document.addEventListener("click", unmuteMusicOnInteraction, { passive: true });
-document.addEventListener("keydown", unmuteMusicOnInteraction, { passive: true });
-
 window.addEventListener("load", () => {
-  startMusic();
   updateInviteeName();
   // Remove any fragment identifier on initial load so the site always
   // lands on the welcome hero instead of jumping to a different page.
@@ -189,7 +212,20 @@ window.addEventListener("load", () => {
     history.replaceState(null, "", window.location.pathname + window.location.search);
   }
   updateActivePage("welcome");
-  startMusic();
+
+  // Start music on first user interaction to satisfy browser autoplay policies.
+  const activateMusic = () => {
+    startMusic();
+    document.removeEventListener("pointerdown", activateMusic);
+    document.removeEventListener("touchstart", activateMusic);
+    document.removeEventListener("click", activateMusic);
+    document.removeEventListener("keydown", activateMusic);
+  };
+
+  document.addEventListener("pointerdown", activateMusic, { passive: true });
+  document.addEventListener("touchstart", activateMusic, { passive: true });
+  document.addEventListener("click", activateMusic, { passive: true });
+  document.addEventListener("keydown", activateMusic, { passive: true });
 
   const storedResponse = getStoredResponse();
   if (storedResponse) {
