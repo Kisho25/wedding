@@ -4,6 +4,7 @@ const dots = Array.from(document.querySelectorAll(".dot"));
 const inviteeNameEl = document.getElementById("inviteeName");
 const confirmButtons = Array.from(document.querySelectorAll("[data-attendance]"));
 const responsePopup = document.getElementById("responsePopup");
+const responseOverlay = document.getElementById("responseOverlay");
 const musicPrompt = document.getElementById("musicPrompt");
 
 const params = new URLSearchParams(window.location.search);
@@ -138,6 +139,11 @@ function showPopup({ title, message }) {
     </div>
   `;
 
+  // Show overlay and popup immediately so the user only sees the popup.
+  if (responseOverlay) {
+    responseOverlay.hidden = false;
+    responseOverlay.setAttribute('aria-hidden', 'false');
+  }
   responsePopup.classList.add("is-visible");
 
   if (popupTimer) {
@@ -146,7 +152,11 @@ function showPopup({ title, message }) {
 
   popupTimer = window.setTimeout(() => {
     responsePopup.classList.remove("is-visible");
-  }, 2600);
+    if (responseOverlay) {
+      responseOverlay.hidden = true;
+      responseOverlay.setAttribute('aria-hidden', 'true');
+    }
+  }, 1200);
 }
 
 const observer = new IntersectionObserver(
@@ -192,13 +202,20 @@ window.addEventListener("load", () => {
 });
 
 confirmButtons.forEach((button) => {
-  button.addEventListener("click", async () => {
+  button.addEventListener("click", async (event) => {
+    // Prevent any default UI changes or anchor navigation.
+    if (event && typeof event.preventDefault === 'function') {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     const attendance = button.getAttribute("data-attendance");
     if (!attendance) {
       return;
     }
 
     setButtonsDisabled(true);
+    // Optimistic UI: show immediate feedback while the network request completes.
+    showPopup({ title: "Saving...", message: "Saving your response…" });
 
     try {
       await saveAttendance(attendance);
