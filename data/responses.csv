@@ -1,0 +1,12 @@
+timestamp,guestId,inviteeName,name,attendance,guests,message,pageUrl
+"2026-07-20T09:38:09.089Z","john-doe","John Doe","John Doe","will attend","2","Looking forward to it","http://192.168.0.125:8000/?guest=John%20Doe&id=john-doe"
+"2026-07-20T09:45:33.200Z","rima-haddad","Rima Haddad","Rima Haddad","will attend","0","","http://192.168.0.125:8000/?guest=Rima%20Haddad&id=rima-haddad"
+"2026-07-20T09:46:27.239Z","rima-haddad","Rima Haddad","Rima Haddad","will attend","0","","http://192.168.0.125:8000/?guest=Rima%20Haddad&id=rima-haddad#confirm"
+"2026-07-20T09:46:29.277Z","rima-haddad","Rima Haddad","Rima Haddad","will not attend","0","","http://192.168.0.125:8000/?guest=Rima%20Haddad&id=rima-haddad#confirm"
+"2026-07-20T09:49:37.724Z","test-guest","Test Guest","Test Guest","will not attend","0","","http://192.168.0.125:8000/?guest=Test%20Guest&id=test-guest"
+"2026-07-20T09:50:03.188Z","rima-haddad","Rima Haddad","Rima Haddad","will attend","0","","http://192.168.0.125:8000/?guest=Rima%20Haddad&id=rima-haddad#welcome"
+"2026-07-20T09:50:05.591Z","rima-haddad","Rima Haddad","Rima Haddad","will not attend","0","","http://192.168.0.125:8000/?guest=Rima%20Haddad&id=rima-haddad#welcome"
+"2026-07-20T09:51:45.713Z","rima-haddad","Rima Haddad","Rima Haddad","will attend","0","","http://192.168.0.125:8000/?guest=Rima%20Haddad&id=rima-haddad"
+"2026-07-20T09:53:41.525Z","rima-haddad","Rima Haddad","Rima Haddad","will attend","0","","http://192.168.0.125:8000/?guest=Rima%20Haddad&id=rima-haddad#confirm"
+"2026-07-20T14:24:30.013Z","rima-haddad","Rima Haddad","Rima Haddad","will attend","0","","http://192.168.0.106:8000/?guest=Rima%20Haddad&id=rima-haddad#confirm"
+"2026-07-20T14:25:13.592Z","rima-haddad","Rima Haddad","Rima Haddad","will not attend","0","","http://192.168.0.106:8000/?guest=Rima%20Haddad&id=rima-haddad#confirm"

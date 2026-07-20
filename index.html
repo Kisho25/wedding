@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wedding Invitation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Allura&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="background">
+      <div class="background__veil"></div>
+      <div class="background__glow background__glow--one"></div>
+      <div class="background__glow background__glow--two"></div>
+      <div class="background__grain"></div>
+    </div>
+
+    <nav class="dots" aria-label="Wedding pages">
+      <a class="dot is-active" href="#welcome" aria-label="Welcome"></a>
+      <a class="dot" href="#details" aria-label="Details"></a>
+      <a class="dot" href="#schedule" aria-label="Schedule"></a>
+      <a class="dot" href="#venue" aria-label="Venue"></a>
+      <a class="dot" href="#confirm" aria-label="Confirm"></a>
+    </nav>
+
+    <main class="story">
+      <section class="page page--hero" id="welcome">
+        <article class="card card--hero">
+          <p class="eyebrow">Wedding Invitation</p>
+          <h1>
+            Sergio & Marine
+          </h1>
+          <p class="guest-callout">
+            For <span id="inviteeName">Guest</span>
+          </p>
+          <p class="tagline invitee-line">
+            You are invited to celebrate with us.
+          </p>
+
+          <div class="hero-meta">
+            <div>
+              <span class="label">Date</span>
+              <p>Saturday, September 5 2026</p>
+            </div>
+            <div>
+              <span class="label">Time</span>
+              <p>8:00 PM</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="page page--detail" id="details">
+        <article class="card story-card">
+          <p class="eyebrow">Our Story</p>
+          <h2>A day for love, family, and celebration</h2>
+          <p>
+            We are grateful for every person who has been part of our journey. Your presence will make this day even more meaningful.
+          </p>
+        </article>
+      </section>
+
+      <section class="page page--detail" id="schedule">
+        <article class="card story-card schedule-card">
+          <p class="eyebrow">Schedule</p>
+          <h2>Timeline</h2>
+          <div class="timeline">
+            <div class="timeline__item">
+              <span class="label">Reception</span>
+              <p>8:00 PM</p>
+            </div>
+            <div class="timeline__item">
+              <span class="label">Dinner & Dancing</span>
+              <p>9:00 PM</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="page page--detail" id="venue">
+        <article class="card story-card">
+          <p class="eyebrow">Venue</p>
+          <h2>Belvaya Venue</h2>
+          <p>Fatqa</p>
+          <a class="rsvp-button" href="#confirm">Confirm Attendance</a>
+        </article>
+      </section>
+
+      <section class="page page--detail" id="confirm">
+        <article class="card story-card confirm-card">
+          <p class="eyebrow">Confirm</p>
+          <h2>Will you be coming?</h2>
+          <p class="confirm-note">
+            Tap one option below. We will save your answer to the guest list file.
+          </p>
+          <div class="confirm-actions">
+            <button class="rsvp-button rsvp-button--yes" type="button" data-attendance="yes">
+              I will attend
+            </button>
+            <button class="rsvp-button rsvp-button--no" type="button" data-attendance="no">
+              I will not attend
+            </button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <div id="responsePopup" class="response-popup" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <audio id="backgroundMusic" loop preload="auto" playsinline>
+      <source src="Perfect.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script src="script.js"></script>
+  </body>
+</html>

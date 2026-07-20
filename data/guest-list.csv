@@ -1,0 +1,5 @@
+guestId,inviteeName,name,attendance,guests,message,lastUpdated,pageUrl
+"john-doe","John Doe","John Doe","will attend","2","Looking forward to it","2026-07-20T09:38:09.089Z","http://192.168.0.125:8000/?guest=John%20Doe&id=john-doe"
+"test-guest","Test Guest","Test Guest","will not attend","0","","2026-07-20T09:49:37.724Z","http://192.168.0.125:8000/?guest=Test%20Guest&id=test-guest"
+"rima-haddad","Rima Haddad","Rima Haddad","will not attend","0","","2026-07-20T14:25:13.592Z","http://192.168.0.106:8000/?guest=Rima%20Haddad&id=rima-haddad#confirm"
+"christian-kichian","Christian Kichian","Christian Kichian","pending","0","","2026-07-20T14:32:57.407Z","http://192.168.0.106:8000/?guest=Christian%20Kichian&id=christian-kichian"

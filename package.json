@@ -1,0 +1,13 @@
+{
+  "name": "wedding-invitation",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "generate:links": "node scripts/generate_public_links.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
