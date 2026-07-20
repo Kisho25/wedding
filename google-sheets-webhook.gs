@@ -8,14 +8,9 @@ function doPost(e) {
   ensureHeaderRow(sheet);
 
   const row = [
-    new Date(),
-    payload.action || "invite",
     payload.guestId || "",
     payload.inviteeName || "",
-    payload.name || "",
     payload.attendance || "pending",
-    payload.guests || "0",
-    payload.message || "",
     payload.pageUrl || "",
   ];
 
@@ -26,14 +21,9 @@ function doPost(e) {
 
 function ensureHeaderRow(sheet) {
   const headers = [
-    "Timestamp",
-    "Action",
     "Guest ID",
     "Invitee Name",
-    "Name",
     "Attendance",
-    "Guests",
-    "Message",
     "Page URL",
   ];
 

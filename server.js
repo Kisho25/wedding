@@ -27,20 +27,72 @@ const mimeTypes = new Map([
 const guestColumns = [
   "guestId",
   "inviteeName",
-  "name",
   "attendance",
-  "guests",
-  "message",
   "lastUpdated",
   "pageUrl",
 ];
 
 async function ensureDataFiles() {
   await fs.mkdir(dataDir, { recursive: true });
-  await ensureFile(responsesCsvPath, "timestamp,guestId,inviteeName,name,attendance,guests,message,pageUrl\n");
+  await ensureFile(responsesCsvPath, "timestamp,guestId,inviteeName,attendance,pageUrl\n");
   await ensureFile(guestStatusCsvPath, `${guestColumns.join(",")}\n`);
+  await migrateLegacyCsvFiles();
   const rows = await readGuestStatusRows();
   await fs.writeFile(guestStatusXlsPath, buildGuestExcelXml(rows), "utf8");
+}
+
+async function migrateLegacyCsvFiles() {
+  const expectedResponsesHeader = "timestamp,guestId,inviteeName,attendance,pageUrl";
+  const expectedGuestHeader = guestColumns.join(",");
+
+  async function rewriteFile(filePath, expectedHeader, mapRow) {
+    try {
+      const content = await fs.readFile(filePath, "utf8");
+      const lines = content.trim().split("\n").filter(Boolean);
+      if (lines.length === 0) {
+        return;
+      }
+
+      const header = lines[0].replace(/"/g, "").trim();
+      if (header === expectedHeader) {
+        return;
+      }
+
+      const mappedRows = lines.slice(1).map((line) => {
+        const values = parseCsvLine(line);
+        return mapRow(values);
+      });
+
+      const nextContent = [expectedHeader, ...mappedRows].join("\n") + "\n";
+      await fs.writeFile(filePath, nextContent, "utf8");
+    } catch {
+      // Ignore migration failures and fall back to the existing file.
+    }
+  }
+
+  await rewriteFile(responsesCsvPath, expectedResponsesHeader, (values) => {
+    return [
+      values[0] || "",
+      values[1] || "",
+      values[2] || "",
+      values[4] || values[3] || "",
+      values[7] || values[6] || "",
+    ]
+      .map((value) => csvEscape(value))
+      .join(",");
+  });
+
+  await rewriteFile(guestStatusCsvPath, expectedGuestHeader, (values) => {
+    return [
+      values[0] || "",
+      values[1] || "",
+      values[3] || "",
+      values[6] || values[4] || "",
+      values[7] || values[5] || "",
+    ]
+      .map((value) => csvEscape(value))
+      .join(",");
+  });
 }
 
 async function ensureFile(filePath, initialContent) {
@@ -65,10 +117,7 @@ function toResponsesCsvLine(row) {
     row.timestamp,
     row.guestId,
     row.inviteeName,
-    row.name,
     row.attendance,
-    row.guests,
-    row.message,
     row.pageUrl,
   ]);
 }
@@ -77,10 +126,7 @@ function toGuestCsvLine(row) {
   return csvLine([
     row.guestId,
     row.inviteeName,
-    row.name,
     row.attendance,
-    row.guests,
-    row.message,
     row.lastUpdated,
     row.pageUrl,
   ]);
@@ -217,12 +263,9 @@ async function readGuestStatusRows() {
       return {
         guestId: values[0] || "",
         inviteeName: values[1] || "",
-        name: values[2] || "",
-        attendance: values[3] || "",
-        guests: values[4] || "",
-        message: values[5] || "",
-        lastUpdated: values[6] || "",
-        pageUrl: values[7] || "",
+        attendance: values[2] || "",
+        lastUpdated: values[3] || "",
+        pageUrl: values[4] || "",
       };
     });
   } catch {

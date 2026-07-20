@@ -4,6 +4,7 @@ const dots = Array.from(document.querySelectorAll(".dot"));
 const inviteeNameEl = document.getElementById("inviteeName");
 const confirmButtons = Array.from(document.querySelectorAll("[data-attendance]"));
 const responsePopup = document.getElementById("responsePopup");
+const musicPrompt = document.getElementById("musicPrompt");
 
 const params = new URLSearchParams(window.location.search);
 const inviteeName = params.get("guest") || params.get("name") || "Guest";
@@ -38,15 +39,27 @@ function updateActivePage(id) {
   });
 }
 
+function unmuteMusicOnInteraction() {
+  if (!music || !musicStarted) {
+    return;
+  }
+
+  if (music.muted) {
+    music.muted = false;
+  }
+}
+
 function startMusic() {
-  if (musicStarted) {
+  if (!music || musicStarted) {
     return;
   }
 
   musicStarted = true;
-  music.play().catch(() => {
-    musicStarted = false;
-  });
+  if (music.muted) {
+    music.play().catch(() => {
+      musicStarted = false;
+    });
+  }
 }
 
 function setButtonsDisabled(disabled) {
@@ -152,10 +165,13 @@ const observer = new IntersectionObserver(
 
 pages.forEach((page) => observer.observe(page));
 
-document.addEventListener("pointerdown", startMusic, { once: true });
-document.addEventListener("touchstart", startMusic, { once: true, passive: true });
+document.addEventListener("pointerdown", unmuteMusicOnInteraction, { passive: true });
+document.addEventListener("touchstart", unmuteMusicOnInteraction, { passive: true });
+document.addEventListener("click", unmuteMusicOnInteraction, { passive: true });
+document.addEventListener("keydown", unmuteMusicOnInteraction, { passive: true });
 
 window.addEventListener("load", () => {
+  startMusic();
   updateInviteeName();
   // Remove any fragment identifier on initial load so the site always
   // lands on the welcome hero instead of jumping to a different page.

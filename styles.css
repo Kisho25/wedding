@@ -205,7 +205,7 @@ h2 {
 .tagline {
   max-width: 26rem;
   margin: 16px auto 0;
-  font-size: 0.9rem;
+  font-size: 1.035rem;
   line-height: 1.8;
   color: var(--hero-soft);
 }
@@ -272,14 +272,14 @@ h2 {
 .story-card p,
 .timeline__item p {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1.0925rem;
   line-height: 1.65;
   color: var(--text);
 }
 
 .card--hero .hero-meta p {
   color: var(--hero-text);
-  font-size: 1rem;
+  font-size: 1.15rem;
 }
 
 .story-card {
@@ -457,6 +457,26 @@ audio {
   display: none;
 }
 
+.music-prompt {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 30;
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(255, 248, 242, 0.96);
+  color: #5f3b2f;
+  box-shadow: 0 10px 24px rgba(58, 30, 21, 0.2);
+  font: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.music-prompt[hidden] {
+  display: none;
+}
+
 @media (max-width: 720px) {
   .dots {
     left: 16px;
@@ -534,7 +554,7 @@ audio {
   .tagline {
     display: block;
     margin-top: 8px;
-    font-size: 0.84rem;
+    font-size: 0.966rem;
     line-height: 1.7;
   }
 

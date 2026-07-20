@@ -7,20 +7,23 @@
   <Worksheet ss:Name="Guest List">
     <Table>
       <Row>
-        <Cell><Data ss:Type="String">guestId</Data></Cell><Cell><Data ss:Type="String">inviteeName</Data></Cell><Cell><Data ss:Type="String">name</Data></Cell><Cell><Data ss:Type="String">attendance</Data></Cell><Cell><Data ss:Type="String">guests</Data></Cell><Cell><Data ss:Type="String">message</Data></Cell><Cell><Data ss:Type="String">lastUpdated</Data></Cell><Cell><Data ss:Type="String">pageUrl</Data></Cell>
+        <Cell><Data ss:Type="String">guestId</Data></Cell><Cell><Data ss:Type="String">inviteeName</Data></Cell><Cell><Data ss:Type="String">attendance</Data></Cell><Cell><Data ss:Type="String">lastUpdated</Data></Cell><Cell><Data ss:Type="String">pageUrl</Data></Cell>
       </Row>
       
       <Row>
-        <Cell><Data ss:Type="String">john-doe</Data></Cell><Cell><Data ss:Type="String">John Doe</Data></Cell><Cell><Data ss:Type="String">John Doe</Data></Cell><Cell><Data ss:Type="String">will attend</Data></Cell><Cell><Data ss:Type="String">2</Data></Cell><Cell><Data ss:Type="String">Looking forward to it</Data></Cell><Cell><Data ss:Type="String">2026-07-20T09:38:09.089Z</Data></Cell><Cell><Data ss:Type="String">http://192.168.0.125:8000/?guest=John%20Doe&amp;id=john-doe</Data></Cell>
+        <Cell><Data ss:Type="String">john-doe</Data></Cell><Cell><Data ss:Type="String">John Doe</Data></Cell><Cell><Data ss:Type="String">will attend</Data></Cell><Cell><Data ss:Type="String">2026-07-20T09:38:09.089Z</Data></Cell><Cell><Data ss:Type="String">http://192.168.0.125:8000/?guest=John%20Doe&amp;id=john-doe</Data></Cell>
       </Row>
       <Row>
-        <Cell><Data ss:Type="String">test-guest</Data></Cell><Cell><Data ss:Type="String">Test Guest</Data></Cell><Cell><Data ss:Type="String">Test Guest</Data></Cell><Cell><Data ss:Type="String">will not attend</Data></Cell><Cell><Data ss:Type="String">0</Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String">2026-07-20T09:49:37.724Z</Data></Cell><Cell><Data ss:Type="String">http://192.168.0.125:8000/?guest=Test%20Guest&amp;id=test-guest</Data></Cell>
+        <Cell><Data ss:Type="String">test-guest</Data></Cell><Cell><Data ss:Type="String">Test Guest</Data></Cell><Cell><Data ss:Type="String">will not attend</Data></Cell><Cell><Data ss:Type="String">2026-07-20T09:49:37.724Z</Data></Cell><Cell><Data ss:Type="String">http://192.168.0.125:8000/?guest=Test%20Guest&amp;id=test-guest</Data></Cell>
       </Row>
       <Row>
-        <Cell><Data ss:Type="String">rima-haddad</Data></Cell><Cell><Data ss:Type="String">Rima Haddad</Data></Cell><Cell><Data ss:Type="String">Rima Haddad</Data></Cell><Cell><Data ss:Type="String">will not attend</Data></Cell><Cell><Data ss:Type="String">0</Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String">2026-07-20T14:25:13.592Z</Data></Cell><Cell><Data ss:Type="String">http://192.168.0.106:8000/?guest=Rima%20Haddad&amp;id=rima-haddad#confirm</Data></Cell>
+        <Cell><Data ss:Type="String">rima-haddad</Data></Cell><Cell><Data ss:Type="String">Rima Haddad</Data></Cell><Cell><Data ss:Type="String">will not attend</Data></Cell><Cell><Data ss:Type="String">2026-07-20T14:25:13.592Z</Data></Cell><Cell><Data ss:Type="String">http://192.168.0.106:8000/?guest=Rima%20Haddad&amp;id=rima-haddad#confirm</Data></Cell>
       </Row>
       <Row>
-        <Cell><Data ss:Type="String">christian-kichian</Data></Cell><Cell><Data ss:Type="String">Christian Kichian</Data></Cell><Cell><Data ss:Type="String">Christian Kichian</Data></Cell><Cell><Data ss:Type="String">pending</Data></Cell><Cell><Data ss:Type="String">0</Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String">2026-07-20T14:32:57.407Z</Data></Cell><Cell><Data ss:Type="String">http://192.168.0.106:8000/?guest=Christian%20Kichian&amp;id=christian-kichian</Data></Cell>
+        <Cell><Data ss:Type="String">christian-kichian</Data></Cell><Cell><Data ss:Type="String">Christian Kichian</Data></Cell><Cell><Data ss:Type="String">pending</Data></Cell><Cell><Data ss:Type="String">2026-07-20T14:32:57.407Z</Data></Cell><Cell><Data ss:Type="String">http://192.168.0.106:8000/?guest=Christian%20Kichian&amp;id=christian-kichian</Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">karl-chidiac</Data></Cell><Cell><Data ss:Type="String"> Karl Chidiac</Data></Cell><Cell><Data ss:Type="String">pending</Data></Cell><Cell><Data ss:Type="String">2026-07-20T14:33:11.407Z</Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
       </Row>
     </Table>
   </Worksheet>
