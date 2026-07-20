@@ -491,6 +491,38 @@ audio {
   display: none;
 }
 
+/* Venue action group: location + confirm buttons */
+.venue-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.location-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: rgba(255, 251, 248, 0.82);
+  border: 1px solid rgba(111, 60, 49, 0.1);
+  color: var(--accent-dark);
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.location-button:hover {
+  transform: translateY(-2px);
+}
+
+/* When buttons are stacked, avoid extra top margin on the confirm link */
+.venue-actions .rsvp-button {
+  margin-top: 0;
+}
+
 @media (max-width: 720px) {
   .dots {
     left: 16px;

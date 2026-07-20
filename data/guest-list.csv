@@ -1,7 +1,8 @@
-guestId,inviteeName,attendance,lastUpdated,pageUrl
-"karl-chidiac","Karl Chidiac"
-"pressila-maalouf","Pressila Maalouf"
-"elise-mahfouz","Elise Mahfouz"
-"youri-el-hachem","Youri El Hachem"
-"valerie-maria-el-achkar","Valerie Maria El Achkar"
-"rita-karam","Rita Karam"
+guestId,inviteeName,name,attendance,guests,message,lastUpdated,pageUrl
+"karl-chidiac","Karl Chidiac","","","","","",""
+"pressila-maalouf","Pressila Maalouf","","","","","",""
+"elise-mahfouz","Elise Mahfouz","","","","","",""
+"youri-el-hachem","Youri El Hachem","","","","","",""
+"valerie-maria-el-achkar","Valerie Maria El Achkar","","","","","",""
+"rita-karam","Rita Karam","","","","","",""
+"test-guest","Test Guest","Test Guest","will attend","0","","2026-07-20T17:04:09.268Z","http://localhost:8000/?guest=Test%20Guest&id=test-guest"

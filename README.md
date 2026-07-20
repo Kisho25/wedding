@@ -39,4 +39,4 @@ For a permanent setup, either:
 - attach persistent disk storage on your host.
 
 
-this is the final upload
+this is the final upload with the working audio in localhost on laptop

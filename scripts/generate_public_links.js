@@ -11,7 +11,7 @@ const path = require('path');
 
 const defaultGuestCsvPath = path.join(__dirname, '..', 'data', 'guest-list.csv');
 const rawGuestCsvPath = process.argv[2];
-const publicHost = process.argv[3] || process.env.PUBLIC_HOST || 'https://wedding-izkc.onrender.com';
+const publicHost = process.argv[3] || process.env.PUBLIC_HOST || 'https://sergio-marine-wedding.onrender.com';
 const outFile = process.argv[4] || process.env.PUBLIC_LINKS_OUT_FILE || path.join(__dirname, '..', 'public-links.csv');
 
 function slugify(value) {

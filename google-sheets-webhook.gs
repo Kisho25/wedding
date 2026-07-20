@@ -7,28 +7,33 @@ function doPost(e) {
 
   ensureHeaderRow(sheet);
 
-  const row = [
-    payload.guestId || "",
-    payload.inviteeName || "",
-    payload.attendance || "pending",
-    payload.pageUrl || "",
-  ];
+  // Only record the invitee name and attendance in the sheet
+  const inviteeName = payload.inviteeName || payload.name || "Guest";
+  const attendance = payload.attendance || "pending";
+  const row = [inviteeName, attendance];
 
-  upsertRow(sheet, payload.guestId || payload.inviteeName || "guest", row);
+  // Use the invitee name as the upsert key (case-insensitive)
+  upsertRow(sheet, inviteeName, row);
 
   return ContentService.createTextOutput(JSON.stringify({ ok: true })).setMimeType(ContentService.MimeType.JSON);
 }
 
 function ensureHeaderRow(sheet) {
   const headers = [
-    "Guest ID",
     "Invitee Name",
     "Attendance",
-    "Page URL",
   ];
 
+  const lastCol = Math.max(1, sheet.getLastColumn());
+  const existing = sheet.getRange(1, 1, 1, lastCol).getValues()[0] || [];
+
+  // If the sheet is empty, append the header. Otherwise, overwrite the header row
+  // to ensure the sheet stores only the two desired columns.
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(headers);
+  } else {
+    // Overwrite first row to the new header length
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
   }
 }
 function upsertRow(sheet, key, rowValues) {
@@ -36,25 +41,22 @@ function upsertRow(sheet, key, rowValues) {
 
   const normalizedKey = String(key || '').trim().toLowerCase();
 
+  // If there are no body rows yet, just append
   if (lastRow < 2) {
     const fullRow = buildFullRow(sheet, rowValues);
     sheet.appendRow(fullRow);
     return;
   }
 
-  // Read the body of the sheet and search for the key in any column (case-insensitive)
-  const body = sheet.getRange(2, 1, lastRow - 1, sheet.getLastColumn()).getValues();
+  // Search for the invitee name in the first column (Invitee Name)
+  const body = sheet.getRange(2, 1, lastRow - 1, 1).getValues();
   let foundRowIndex = -1;
   for (let i = 0; i < body.length; i++) {
-    const row = body[i];
-    for (let j = 0; j < row.length; j++) {
-      const cell = String(row[j] || '').trim().toLowerCase();
-      if (cell && cell === normalizedKey) {
-        foundRowIndex = i; // zero-based within body
-        break;
-      }
+    const cell = String(body[i][0] || '').trim().toLowerCase();
+    if (cell && cell === normalizedKey) {
+      foundRowIndex = i; // zero-based within body
+      break;
     }
-    if (foundRowIndex !== -1) break;
   }
 
   const fullRow = buildFullRow(sheet, rowValues);
