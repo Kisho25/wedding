@@ -31,7 +31,7 @@ node scripts/generate_public_links.js data/guest-list.csv https://your-public-ho
 
 ## Important note about data storage
 
-On cloud hosting, local files like `data/guest-list.csv` and `data/responses.csv` may not persist across restarts unless you add persistent storage.
+On cloud hosting, local files like `data/guest-status.csv` and `data/responses.csv` may not persist across restarts unless you add persistent storage.
 
 For a permanent setup, either:
 

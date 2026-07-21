@@ -162,7 +162,7 @@ function showPopup({ title, message }) {
 
   responsePopup.innerHTML = `
     <div class="response-popup__card">
-      <p class="response-popup__eyebrow">Confirmation saved</p>
+      <p class="response-popup__eyebrow">Confirmation</p>
       <h3>${title}</h3>
       <p>${message}</p>
     </div>
@@ -250,30 +250,29 @@ confirmButtons.forEach((button) => {
     }
 
     setButtonsDisabled(true);
-    // Optimistic UI: show immediate feedback while the network request completes.
-    showPopup({ title: "Saving...", message: "Saving your response…" });
+    showPopup(
+      attendance === "yes"
+        ? {
+            title: "Thank you",
+            message: "We are looking forward to celebrating with you.",
+          }
+        : {
+            title: "Thank you for letting us know",
+            message: "We will miss you, but we appreciate your response.",
+          },
+    );
 
-    try {
-      await saveAttendance(attendance);
-      storeResponse(attendance);
-
-      showPopup(
-        attendance === "yes"
-          ? {
-              title: "Thank you",
-              message: "We are looking forward to celebrating with you.",
-            }
-          : {
-              title: "Thank you for letting us know",
-              message: "We will miss you, but we appreciate your response.",
-            },
-      );
-    } catch (error) {
-      showPopup({
-        title: "Could not save response",
-        message: error.message || "There was a problem saving your answer.",
+    // Save the response in the background after showing the final message.
+    saveAttendance(attendance)
+      .then(() => {
+        storeResponse(attendance);
+      })
+      .catch((error) => {
+        showPopup({
+          title: "Could not save response",
+          message: error.message || "There was a problem saving your answer.",
+        });
+        setButtonsDisabled(false);
       });
-      setButtonsDisabled(false);
-    }
   });
 });

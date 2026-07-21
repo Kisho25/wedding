@@ -5,9 +5,10 @@ const fs = require("fs/promises");
 
 const rootDir = __dirname;
 const dataDir = path.join(rootDir, "data");
+const guestListCsvPath = path.join(dataDir, "guest-list.csv");
+const guestStatusCsvPath = path.join(dataDir, "guest-status.csv");
+const guestStatusXlsPath = path.join(dataDir, "guest-status.xls");
 const responsesCsvPath = path.join(dataDir, "responses.csv");
-const guestStatusCsvPath = path.join(dataDir, "guest-list.csv");
-const guestStatusXlsPath = path.join(dataDir, "guest-list.xls");
 const googleSheetsWebhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL || "";
 
 const mimeTypes = new Map([
@@ -157,7 +158,7 @@ function buildGuestExcelXml(rows) {
  xmlns:x="urn:schemas-microsoft-com:office:excel"
  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
  xmlns:html="http://www.w3.org/TR/REC-html40">
-  <Worksheet ss:Name="Guest List">
+  <Worksheet ss:Name="Guest Status">
     <Table>
       <Row>
         ${guestColumns.map((column) => `<Cell><Data ss:Type="String">${escapeXml(column)}</Data></Cell>`).join("")}
@@ -184,10 +185,14 @@ function getStaticPath(requestPath) {
   }
 
   if (requestPath === "/api/guest-list.csv") {
+    return guestListCsvPath;
+  }
+
+  if (requestPath === "/api/guest-status.csv") {
     return guestStatusCsvPath;
   }
 
-  if (requestPath === "/api/guest-list.xls") {
+  if (requestPath === "/api/guest-status.xls") {
     return guestStatusXlsPath;
   }
 
