@@ -114,6 +114,14 @@ function storeResponse(attendance) {
   }
 }
 
+function clearStoredResponse() {
+  try {
+    window.localStorage.removeItem(responseStorageKey);
+  } catch {
+    // Ignore storage failures.
+  }
+}
+
 async function registerInvite() {
   await fetch("/api/invite", {
     method: "POST",
@@ -213,6 +221,13 @@ window.addEventListener("load", () => {
   }
   updateActivePage("welcome");
 
+  if (params.get("reset") === "1") {
+    clearStoredResponse();
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.delete("reset");
+    history.replaceState(null, "", nextUrl.pathname + nextUrl.search + nextUrl.hash);
+  }
+
   // Start music on first user interaction to satisfy browser autoplay policies.
   const activateMusic = () => {
     startMusic();
@@ -234,6 +249,8 @@ window.addEventListener("load", () => {
       responsePopup.classList.remove("is-visible");
       responsePopup.innerHTML = "";
     }
+  } else {
+    setButtonsDisabled(false);
   }
 });
 
