@@ -22,7 +22,8 @@
     </div>
 
     <nav class="dots" aria-label="Wedding pages">
-        <a class="dot is-active" href="#welcome" aria-label="Welcome"></a>
+        <a class="dot is-active" href="#opening" aria-label="Open invitation"></a>
+        <a class="dot" href="#welcome" aria-label="Welcome"></a>
         <a class="dot" href="#details" aria-label="Details"></a>
         <a class="dot" href="#schedule" aria-label="Schedule"></a>
         <a class="dot" href="#venue" aria-label="Venue"></a>
@@ -30,6 +31,22 @@
     </nav>
 
     <main class="story">
+        <section class="page page--opening" id="opening" aria-labelledby="openInvitationTitle">
+            <div class="opening-content">
+                <p class="opening-copy">You are invited to</p>
+                <h1 id="openInvitationTitle">Sergio &amp; Marine's wedding</h1>
+                <div id="countdown" class="countdown" aria-label="Countdown to the wedding">
+                    <div><strong id="countdownDays">--</strong><span>Days</span></div>
+                    <div><strong id="countdownHours">--</strong><span>Hours</span></div>
+                    <div><strong id="countdownMinutes">--</strong><span>Minutes</span></div>
+                    <div><strong id="countdownSeconds">--</strong><span>Seconds</span></div>
+                </div>
+                <button id="openInvitation" class="open-invitation-button" type="button">
+                    Open invitation
+                </button>
+            </div>
+        </section>
+
         <section class="page page--hero" id="welcome">
             <article class="card card--hero">
                 <p class="eyebrow">Wedding Invitation</p>
@@ -125,7 +142,7 @@
     <div id="responsePopup" class="response-popup" role="status" aria-live="polite" aria-atomic="true"></div>
     <div id="responseOverlay" class="response-overlay" hidden aria-hidden="true"></div>
 
-    <audio id="backgroundMusic" preload="auto" autoplay playsinline>
+    <audio id="backgroundMusic" preload="auto" playsinline>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
     <script src="script.js"></script>

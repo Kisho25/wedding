@@ -1,4 +1,10 @@
 const music = document.getElementById("backgroundMusic");
+const openInvitationButton = document.getElementById("openInvitation");
+const countdown = document.getElementById("countdown");
+const countdownDays = document.getElementById("countdownDays");
+const countdownHours = document.getElementById("countdownHours");
+const countdownMinutes = document.getElementById("countdownMinutes");
+const countdownSeconds = document.getElementById("countdownSeconds");
 const pages = Array.from(document.querySelectorAll(".page"));
 const dots = Array.from(document.querySelectorAll(".dot"));
 const inviteeNameEl = document.getElementById("inviteeName");
@@ -52,6 +58,30 @@ function startMusic() {
   return Promise.resolve(playPromise)
     .then(() => true)
     .catch(() => false);
+}
+
+function updateCountdown() {
+  if (!countdown) {
+    return;
+  }
+
+  // September is daylight-saving time in Beirut (UTC+03:00).
+  const weddingTime = new Date("2026-09-05T17:30:00+03:00").getTime();
+  const remaining = Math.max(0, weddingTime - Date.now());
+  const totalSeconds = Math.floor(remaining / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  if (countdownDays) countdownDays.textContent = String(days);
+  if (countdownHours) countdownHours.textContent = String(hours).padStart(2, "0");
+  if (countdownMinutes) countdownMinutes.textContent = String(minutes).padStart(2, "0");
+  if (countdownSeconds) countdownSeconds.textContent = String(seconds).padStart(2, "0");
+
+  if (remaining === 0) {
+    countdown.setAttribute("aria-label", "The wedding day is here");
+  }
 }
 
 function setButtonsDisabled(disabled) {
@@ -174,19 +204,30 @@ const observer = new IntersectionObserver(
 
 pages.forEach((page) => observer.observe(page));
 
+dots.forEach((dot) => {
+  dot.addEventListener("click", (event) => {
+    const targetId = dot.getAttribute("href")?.slice(1);
+    const targetPage = pages.find((page) => page.id === targetId);
+    if (!targetPage) {
+      return;
+    }
+
+    event.preventDefault();
+    targetPage.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+  });
+});
+
 window.addEventListener("load", () => {
   updateInviteeName();
-
-  // Attempt autoplay immediately. If the browser blocks audible autoplay, the
-  // interaction listeners below will start the same one-time track instead.
-  startMusic();
+  updateCountdown();
+  window.setInterval(updateCountdown, 1000);
 
   // Remove any fragment identifier on initial load so the site always
   // lands on the welcome hero instead of jumping to a different page.
   if (window.location.hash) {
     history.replaceState(null, "", window.location.pathname + window.location.search);
   }
-  updateActivePage("welcome");
+  updateActivePage("opening");
 
   if (params.get("reset") === "1") {
     clearStoredResponse();
@@ -195,35 +236,20 @@ window.addEventListener("load", () => {
     history.replaceState(null, "", nextUrl.pathname + nextUrl.search + nextUrl.hash);
   }
 
-  // Start music on first user interaction to satisfy browser autoplay policies.
-  const activateMusic = () => {
-    startMusic().then((started) => {
-      if (!started) {
-        return;
-      }
-      document.removeEventListener("pointerdown", activateMusic);
-      document.removeEventListener("touchstart", activateMusic);
-      document.removeEventListener("click", activateMusic);
-      document.removeEventListener("keydown", activateMusic);
-    });
-  };
-
-  // Any click or tap anywhere on the page should start the music.
-  document.addEventListener("pointerdown", activateMusic, { passive: true, capture: true });
-  document.addEventListener("touchstart", activateMusic, { passive: true, capture: true });
-  document.addEventListener("click", activateMusic, { passive: true, capture: true });
-  document.addEventListener("keydown", activateMusic, { passive: true, capture: true });
-
-  const storedResponse = getStoredResponse();
-  if (storedResponse) {
-    setButtonsDisabled(true);
-    if (responsePopup) {
-      responsePopup.classList.remove("is-visible");
-      responsePopup.innerHTML = "";
-    }
-  } else {
-    setButtonsDisabled(false);
+  if (openInvitationButton) {
+    openInvitationButton.addEventListener("click", () => {
+      // Calling play() directly in this button handler preserves the browser's
+      // user-gesture permission for audible music on mobile devices.
+      startMusic();
+      document.getElementById("welcome")?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
+    }, { once: true });
   }
+
+  setButtonsDisabled(false);
 });
 
 confirmButtons.forEach((button) => {
