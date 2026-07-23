@@ -1,5 +1,6 @@
 const music = document.getElementById("backgroundMusic");
 const openInvitationButton = document.getElementById("openInvitation");
+const story = document.querySelector(".story");
 const countdown = document.getElementById("countdown");
 const countdownDays = document.getElementById("countdownDays");
 const countdownHours = document.getElementById("countdownHours");
@@ -16,6 +17,7 @@ const params = new URLSearchParams(window.location.search);
 const inviteeName = params.get("guest") || params.get("name") || "Guest";
 const guestId = params.get("id") || params.get("guestId") || slugify(inviteeName);
 const responseStorageKey = `wedding-response-${guestId}`;
+let autoScrollTimer = null;
 
 function slugify(value) {
   return (
@@ -42,6 +44,28 @@ function updateActivePage(id) {
   dots.forEach((dot) => {
     dot.classList.toggle("is-active", dot.getAttribute("href") === `#${id}`);
   });
+}
+
+function startAutoScroll() {
+  if (autoScrollTimer || !story) {
+    return;
+  }
+
+  // The opening screen is a launch screen, not part of the repeating tour.
+  const invitationPages = pages.filter((page) => page.id !== "opening");
+
+  autoScrollTimer = window.setInterval(() => {
+    const currentIndex = invitationPages.findIndex((page) => page.classList.contains("is-active"));
+    const nextIndex = currentIndex < 0 || currentIndex === invitationPages.length - 1
+      ? 0
+      : currentIndex + 1;
+
+    invitationPages[nextIndex]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start",
+    });
+  }, 5000);
 }
 
 function startMusic() {
@@ -250,6 +274,7 @@ window.addEventListener("load", () => {
         block: "nearest",
         inline: "start",
       });
+      startAutoScroll();
     }, { once: true });
   }
 
