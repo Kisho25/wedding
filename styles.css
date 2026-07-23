@@ -116,7 +116,7 @@ body {
   -webkit-backdrop-filter: blur(18px) saturate(1.08);
   text-align: center;
   overflow: hidden;
-  font-size: 0.9rem;
+  font-size: 1.02rem;
   transform: translateY(0);
   transition: transform 420ms ease, opacity 420ms ease, box-shadow 420ms ease;
 }
@@ -142,6 +142,13 @@ body {
 
 .page--hero {
   align-items: center;
+}
+
+.page--venue {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px;
 }
 
 .card--hero {
@@ -172,7 +179,7 @@ body {
   margin: 0 0 12px;
   text-transform: uppercase;
   letter-spacing: 0.32em;
-  font-size: 0.7rem;
+  font-size: 0.82rem;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 600;
   color: var(--hero-soft);
@@ -188,7 +195,7 @@ p {
 h1 {
   margin-bottom: 0;
   font-family: "Allura", cursive;
-  font-size: calc(clamp(3rem, 9vw, 5.2rem) * 0.9);
+  font-size: clamp(3.4rem, 9vw, 5.8rem);
   line-height: 0.9;
   letter-spacing: 0.02em;
   color: var(--hero-text);
@@ -197,7 +204,7 @@ h1 {
 h2 {
   margin-bottom: 14px;
   font-family: "Allura", cursive;
-  font-size: calc(clamp(2rem, 5vw, 3rem) * 0.9);
+  font-size: clamp(2.35rem, 5vw, 3.35rem);
   line-height: 1;
   color: #7b4035;
 }
@@ -205,7 +212,7 @@ h2 {
 .tagline {
   max-width: 26rem;
   margin: 16px auto 0;
-  font-size: 1.035rem;
+  font-size: 1.16rem;
   line-height: 1.8;
   color: var(--hero-soft);
 }
@@ -213,14 +220,14 @@ h2 {
 .guest-callout {
   margin: 12px 0 0;
   font-family: "Allura", cursive;
-  font-size: calc(clamp(2rem, 6vw, 3.2rem) * 0.9);
+  font-size: clamp(2.35rem, 6vw, 3.6rem);
   line-height: 1;
   color: var(--hero-text);
   letter-spacing: 0.02em;
 }
 
 .invitee-line {
-  font-size: 0.95rem;
+  font-size: 1.06rem;
   max-width: 20rem;
   margin-top: 10px;
 }
@@ -260,7 +267,7 @@ h2 {
   display: inline-block;
   margin-bottom: 6px;
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.22em;
@@ -272,14 +279,14 @@ h2 {
 .story-card p,
 .timeline__item p {
   margin: 0;
-  font-size: 1.202rem;
+  font-size: 1.34rem;
   line-height: 1.65;
   color: var(--text);
 }
 
 .card--hero .hero-meta p {
   color: var(--hero-text);
-  font-size: 1.15rem;
+  font-size: 1.28rem;
 }
 
 .story-card {
@@ -404,14 +411,14 @@ h2 {
   margin: 0 0 8px;
   text-transform: uppercase;
   letter-spacing: 0.22em;
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   color: var(--accent);
 }
 
 .response-popup__card h3 {
   margin: 0 0 8px;
   font-family: "Allura", cursive;
-  font-size: 2rem;
+  font-size: 2.3rem;
   line-height: 1;
   color: var(--accent-dark);
 }
@@ -469,7 +476,7 @@ audio {
   color: #5f3b2f;
   box-shadow: 0 10px 24px rgba(58, 30, 21, 0.2);
   font: inherit;
-  font-size: 0.95rem;
+  font-size: 1.06rem;
   cursor: pointer;
 }
 
@@ -504,13 +511,14 @@ audio {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 18px;
+  padding: 14px 20px;
   border-radius: 999px;
   background: rgba(255, 251, 248, 0.82);
   border: 1px solid rgba(111, 60, 49, 0.1);
   color: var(--accent-dark);
   font-weight: 700;
   text-decoration: none;
+  font-size: 1.02rem;
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
@@ -590,22 +598,22 @@ audio {
   }
 
   .card--hero h1 {
-    font-size: clamp(2.4rem, 12vw, 3.4rem);
+    font-size: clamp(2.7rem, 12vw, 3.9rem);
   }
 
   .guest-callout {
-    font-size: clamp(1.9rem, 9vw, 2.7rem);
+    font-size: clamp(2.2rem, 9vw, 3.2rem);
   }
 
   .tagline {
     display: block;
     margin-top: 8px;
-    font-size: 0.966rem;
+    font-size: 1.08rem;
     line-height: 1.7;
   }
 
   .invitee-line {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .hero-meta {
@@ -658,6 +666,14 @@ audio {
   .story-card,
   .card--hero {
     width: min(100%, 100%);
+  }
+
+  .hero-meta p,
+  .story-card p,
+  .timeline__item p,
+  .location-button,
+  .music-prompt {
+    font-size: 1.04rem;
   }
 
   .background__veil {
