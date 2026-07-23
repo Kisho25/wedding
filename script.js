@@ -1,5 +1,4 @@
 const music = document.getElementById("backgroundMusic");
-const prerollMusic = document.getElementById("backgroundMusicPreroll");
 const pages = Array.from(document.querySelectorAll(".page"));
 const dots = Array.from(document.querySelectorAll(".dot"));
 const inviteeNameEl = document.getElementById("inviteeName");
@@ -10,7 +9,6 @@ const responseOverlay = document.getElementById("responseOverlay");
 const params = new URLSearchParams(window.location.search);
 const inviteeName = params.get("guest") || params.get("name") || "Guest";
 const guestId = params.get("id") || params.get("guestId") || slugify(inviteeName);
-let musicStarted = false;
 const responseStorageKey = `wedding-response-${guestId}`;
 
 function slugify(value) {
@@ -40,56 +38,20 @@ function updateActivePage(id) {
   });
 }
 
-function playMainMusic() {
-  if (!music || musicStarted) {
-    return;
-  }
-
-  musicStarted = true;
-  music.currentTime = 0;
-  music.volume = 1;
-  const playPromise = music.play();
-
-  if (playPromise && typeof playPromise.then === "function") {
-    playPromise
-      .then(() => {
-        music.muted = false;
-      })
-      .catch(() => {
-        musicStarted = false;
-      });
-  } else {
-    music.muted = false;
-  }
-}
-
 function startMusic() {
-  if (!music || musicStarted) {
-    return;
+  if (!music) {
+    return Promise.resolve();
   }
 
-  if (prerollMusic) {
-    prerollMusic.currentTime = 0;
-    prerollMusic.volume = 1;
-    const prerollPromise = prerollMusic.play();
+  // Keep the real song's play() call inside the user's gesture. The previous
+  // silent preroll delayed it, which browsers (notably iOS Safari) block.
+  music.volume = 1;
+  music.muted = false;
+  const playPromise = music.paused ? music.play() : Promise.resolve();
 
-    if (prerollPromise && typeof prerollPromise.then === "function") {
-      prerollPromise
-        .then(() => {
-          prerollMusic.muted = false;
-          prerollMusic.addEventListener("ended", playMainMusic, { once: true });
-          if (prerollMusic.currentTime >= prerollMusic.duration - 0.05) {
-            playMainMusic();
-          }
-        })
-        .catch(() => {
-          playMainMusic();
-        });
-      return;
-    }
-  }
-
-  playMainMusic();
+  return Promise.resolve(playPromise)
+    .then(() => true)
+    .catch(() => false);
 }
 
 function setButtonsDisabled(disabled) {
@@ -214,6 +176,7 @@ pages.forEach((page) => observer.observe(page));
 
 window.addEventListener("load", () => {
   updateInviteeName();
+
   // Remove any fragment identifier on initial load so the site always
   // lands on the welcome hero instead of jumping to a different page.
   if (window.location.hash) {
@@ -230,11 +193,15 @@ window.addEventListener("load", () => {
 
   // Start music on first user interaction to satisfy browser autoplay policies.
   const activateMusic = () => {
-    startMusic();
-    document.removeEventListener("pointerdown", activateMusic);
-    document.removeEventListener("touchstart", activateMusic);
-    document.removeEventListener("click", activateMusic);
-    document.removeEventListener("keydown", activateMusic);
+    startMusic().then((started) => {
+      if (!started) {
+        return;
+      }
+      document.removeEventListener("pointerdown", activateMusic);
+      document.removeEventListener("touchstart", activateMusic);
+      document.removeEventListener("click", activateMusic);
+      document.removeEventListener("keydown", activateMusic);
+    });
   };
 
   // Any click or tap anywhere on the page should start the music.
