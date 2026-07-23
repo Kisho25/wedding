@@ -84,6 +84,9 @@ function updateCountdown() {
   }
 }
 
+// Run as soon as this script is parsed, without waiting for images or fonts.
+updateCountdown();
+
 function setButtonsDisabled(disabled) {
   confirmButtons.forEach((button) => {
     button.disabled = disabled;
