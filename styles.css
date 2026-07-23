@@ -516,6 +516,15 @@ h2 {
   pointer-events: auto;
 }
 
+.invitation-locked .story {
+  overflow-x: hidden;
+}
+
+.invitation-locked .dots {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .dot {
   width: 8px;
   height: 8px;

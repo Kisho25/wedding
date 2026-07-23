@@ -244,6 +244,7 @@ window.addEventListener("load", () => {
       // Calling play() directly in this button handler preserves the browser's
       // user-gesture permission for audible music on mobile devices.
       startMusic();
+      document.body.classList.remove("invitation-locked");
       document.getElementById("welcome")?.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
