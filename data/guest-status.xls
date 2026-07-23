@@ -7,30 +7,9 @@
   <Worksheet ss:Name="Guest Status">
     <Table>
       <Row>
-        <Cell><Data ss:Type="String">guestId</Data></Cell><Cell><Data ss:Type="String">inviteeName</Data></Cell><Cell><Data ss:Type="String">name</Data></Cell><Cell><Data ss:Type="String">attendance</Data></Cell><Cell><Data ss:Type="String">guests</Data></Cell><Cell><Data ss:Type="String">message</Data></Cell><Cell><Data ss:Type="String">lastUpdated</Data></Cell><Cell><Data ss:Type="String">pageUrl</Data></Cell>
+        <Cell><Data ss:Type="String">guestId</Data></Cell><Cell><Data ss:Type="String">inviteeName</Data></Cell><Cell><Data ss:Type="String">attendance</Data></Cell><Cell><Data ss:Type="String">lastUpdated</Data></Cell><Cell><Data ss:Type="String">pageUrl</Data></Cell>
       </Row>
       
-      <Row>
-        <Cell><Data ss:Type="String">karl-chidiac</Data></Cell><Cell><Data ss:Type="String">Karl Chidiac</Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
-      </Row>
-      <Row>
-        <Cell><Data ss:Type="String">pressila-maalouf</Data></Cell><Cell><Data ss:Type="String">Pressila Maalouf</Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
-      </Row>
-      <Row>
-        <Cell><Data ss:Type="String">elise-mahfouz</Data></Cell><Cell><Data ss:Type="String">Elise Mahfouz</Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
-      </Row>
-      <Row>
-        <Cell><Data ss:Type="String">youri-el-hachem</Data></Cell><Cell><Data ss:Type="String">Youri El Hachem</Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
-      </Row>
-      <Row>
-        <Cell><Data ss:Type="String">valerie-maria-el-achkar</Data></Cell><Cell><Data ss:Type="String">Valerie Maria El Achkar</Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
-      </Row>
-      <Row>
-        <Cell><Data ss:Type="String">rita-karam</Data></Cell><Cell><Data ss:Type="String">Rita Karam</Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String"></Data></Cell>
-      </Row>
-      <Row>
-        <Cell><Data ss:Type="String">test-guest</Data></Cell><Cell><Data ss:Type="String">Test Guest</Data></Cell><Cell><Data ss:Type="String">Test Guest</Data></Cell><Cell><Data ss:Type="String">will attend</Data></Cell><Cell><Data ss:Type="String">0</Data></Cell><Cell><Data ss:Type="String"></Data></Cell><Cell><Data ss:Type="String">2026-07-20T17:04:09.268Z</Data></Cell><Cell><Data ss:Type="String">http://localhost:8000/?guest=Test%20Guest&amp;id=test-guest</Data></Cell>
-      </Row>
     </Table>
   </Worksheet>
 </Workbook>

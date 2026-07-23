@@ -1,1 +1,1 @@
-"2026-07-21T07:47:31.474Z","tesyt-guest","Testt Guest","Testt Guest","will attend","0","","http://localhost:8000/?guest=Testt%20Guest&id=tesyt-guest"
+timestamp,guestId,inviteeName,attendance,pageUrl

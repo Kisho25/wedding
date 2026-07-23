@@ -177,6 +177,10 @@ pages.forEach((page) => observer.observe(page));
 window.addEventListener("load", () => {
   updateInviteeName();
 
+  // Attempt autoplay immediately. If the browser blocks audible autoplay, the
+  // interaction listeners below will start the same one-time track instead.
+  startMusic();
+
   // Remove any fragment identifier on initial load so the site always
   // lands on the welcome hero instead of jumping to a different page.
   if (window.location.hash) {
