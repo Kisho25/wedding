@@ -56,9 +56,13 @@ function startAutoScroll() {
 
   autoScrollTimer = window.setInterval(() => {
     const currentIndex = invitationPages.findIndex((page) => page.classList.contains("is-active"));
-    const nextIndex = currentIndex < 0 || currentIndex === invitationPages.length - 1
-      ? 0
-      : currentIndex + 1;
+    if (currentIndex === invitationPages.length - 1) {
+      window.clearInterval(autoScrollTimer);
+      autoScrollTimer = null;
+      return;
+    }
+
+    const nextIndex = currentIndex < 0 ? 0 : currentIndex + 1;
 
     invitationPages[nextIndex]?.scrollIntoView({
       behavior: "smooth",
