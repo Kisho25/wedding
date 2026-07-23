@@ -69,7 +69,7 @@ function startAutoScroll() {
       block: "nearest",
       inline: "start",
     });
-  }, 5000);
+  }, 6500);
 }
 
 function startMusic() {
@@ -279,7 +279,7 @@ window.addEventListener("load", () => {
         inline: "start",
       });
       startAutoScroll();
-    }, { once: true });
+    });
   }
 
   setButtonsDisabled(false);
