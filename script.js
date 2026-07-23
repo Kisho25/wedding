@@ -237,10 +237,11 @@ window.addEventListener("load", () => {
     document.removeEventListener("keydown", activateMusic);
   };
 
-  document.addEventListener("pointerdown", activateMusic, { passive: true });
-  document.addEventListener("touchstart", activateMusic, { passive: true });
-  document.addEventListener("click", activateMusic, { passive: true });
-  document.addEventListener("keydown", activateMusic, { passive: true });
+  // Any click or tap anywhere on the page should start the music.
+  document.addEventListener("pointerdown", activateMusic, { passive: true, capture: true });
+  document.addEventListener("touchstart", activateMusic, { passive: true, capture: true });
+  document.addEventListener("click", activateMusic, { passive: true, capture: true });
+  document.addEventListener("keydown", activateMusic, { passive: true, capture: true });
 
   const storedResponse = getStoredResponse();
   if (storedResponse) {
